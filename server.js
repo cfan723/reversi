@@ -42,12 +42,11 @@ console.log('The Server is running');
 
 var players = [];
 
-
 var io = require('socket.io').listen(app);
 
-io.sockets.on('connection', function(socket){
+io.sockets.on('connection', function (socket) {
 
-	log('Client connection by '+socket.id);
+	log('Client connection by '+socket_id);
 	
 	function log(){
 		var array = ['*** Server Log Message: '];
@@ -81,7 +80,7 @@ io.sockets.on('connection', function(socket){
 			*/
 
 	socket.on('join_room',function(payload){
-		log('\'join_room\' command' +JSON.stringify(payload));
+		log('\'join_room\' command'+JSON.stringify(payload));
 
 		/*check that the client sent a payload */
 
@@ -112,7 +111,7 @@ io.sockets.on('connection', function(socket){
 
 		var username = payload.username
 		if('undefined' === typeof username || !username) {
-		var error_message = 'join_room didn\'t specify a username, command aborted';
+		var error_message = 'join_room didn\'t specify a username command aborted';
 		log(error_message);
 		socket.emit('join_room_response', {
 											result: 'fail',
@@ -121,19 +120,19 @@ io.sockets.on('connection', function(socket){
 		return;
 		}
 
-		/* store information about this new player */
-
-		players[socket.id] = {};
-		players[socket.id].username = username;
-		players[socket.id].room = room;
+		/*store information about this new player */
+		players[socket_id] = {};
+		players[socket_id].username = username;
+		players[socket_id].room = room;
 
 		/* actually have the user join the room */
 
 		socket.join(room);
 
-		/*get the room object */
 
-		var roomObject = io.sockets.adapter.rooms[room];
+		/* get the room object */
+
+		var roomObject = io.sockets.adapter.room[room];
 
 		/*tell eveyone already in the room that someone just joined */
 
@@ -155,12 +154,15 @@ io.sockets.on('connection', function(socket){
 								socket_id: socket_in_room,
 								membership: numClients
 							};
+
 			socket.emit('join_room_response ', success_data);
 		}
 
 		log('join_room success');
 
-		});
+	});
+
+});
 	
 	socket.on('disconnect',function(socket){
 		log('Client disconnected '+JSON.stringify(players[socket.id]));
@@ -253,8 +255,5 @@ socket.on('send_message',function(payload){
 
 		});
 
-
-
-});
 
 

@@ -1,79 +1,87 @@
-<!DOCTYPE html>
 <html lang='en'>
-  <head>
-    <meta charset='utf-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+    
+    <head>
+        <meta charset='utf-8' />
+        <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+        <meta name='viewport' content='width=device-width, initial-scale=1' />
+        <meta name='description' content='' />
+        <meta name='author' content='' />
+        <title>Reversi Game Lobby</title>
+ 
+        <!-- Bootstrap Core CSS -->
+        <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css' integrity='sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ' crossorigin='anonymous'>
+        <!-- Custom Fonts -->
+        <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'
+        />
+        <link href='https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900'
+        rel='stylesheet'
+        />
+        <link href='https://fonts.googleapis.com/css?family=Muli' rel='stylesheet'
+        />
+        <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'
+        />
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+        <!-- Plugin CSS -->
+        <link rel='stylesheet' href='lib/font-awesome/css/font-awesome.min.css'
+        />
+        <link rel='stylesheet' href='lib/simple-line-icons/css/simple-line-icons.css'
+        />
+        <link rel='stylesheet' href='lib/device-mockups/device-mockups.min.css'
+        />
+        <!-- Theme CSS -->
+        <link href='css/new-age.css' rel='stylesheet' />
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media
+        queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file://
+        -->
+        <!--[if lt IE 9]>
+        <![endif]-->
+    </head>
 
-    <title> Reversi Game Lobby </title>
 
-    <style>
-    #header-box {
-      background-image: url('assets/images/green.png');
-    }
 
-    </style>
 
-    <!-- Bootstrap CSS -->
-    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css' integrity='sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ' crossorigin='anonymous'>
-  </head>
-  <body>
-    <div class='container-fluid text-center'>
-      
-      <div class='row' id='header-box'>
+
+        <section id="download" class="download text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                         <h2 class="section-heading">Lobby</h2>
+                    </div>
+                </div>
+
+                <div class='row align-items-end' id='players'>
+                    <div class='col-9 text-left'>
+                        <h3>Players</h3>
+                    </div>
+                    <div class='col-3'>
+                    </div>
+
+                    <!--This is where the new people in the lobby are going to go -->
+
+                </div>
+                <div class='col text-left'>
+                    <h3>Messages</h3>
+                    <form class='form-inline' onsubmit='send_message(); return false;'>
+                        <label for='send_message_holder' class='col-form-label sr-only'>Enter your chat message</label>
+                        <input class='form-control mx-auto w-75' type='text' value='' id='send_message_holder' placeholder='Enter your chat message' autocomplete='off'/>
+                        <button type='submit' class='btn btn-default btn-primary'>Send</button>
+                    </form>
+                </div>
+                <div class='col text-left'>
+                        <div id='messages'>
+                        </div>
+                </div>
+            </div>
+        </section>
         
-        <div class='col'>
-            <h2> Lobby </h2>
-        </div>
-
-      </div>
-
-      <div class='row align-items-end' id='players'>
-      <div class='col-9 text-left'>
-        <h3>Players</h3>
-        </div>
-        <div class='col-3'>
-        </div>
-
-        <!---this is where the new poeple in the lobby are going to go -->
-
-
-      </div>
-
-
-      <div class='row'>
-       
-        <div class='col text-left'>
-          <h3> Messages </h3>
-          <div id='messages'>
-          </div>
-        
-        </div>
-      </div>
-        <div class='row'>
-       
-        <div class='col'>
-         <form onsubmit='send_message(); return false; '>
-            
-
-            <div class='form-group'>
-                <label for='send_message_holder' class='col-form-label sr-only'> Enter your own chat message
-                </label>
-                <input class='form-control' type='text' value='' id='send_message_holder' placeholder='Enter your chat message' autocomplete='off' />
-             </div>
-             <button type='submit' class='btn btn-default btn-primary'> Send </button>
-
-
-        </form>
-        </div>
-    </div>
-  </div>
-
-
     <!-- jQuery first, then Tether, then Bootstrap JS. -->
-     <script src='https://code.jquery.com/jquery-3.2.1.min.js' integrity='sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=' crossorigin='anonymous'></script>
+    <script src='https://code.jquery.com/jquery-3.2.1.min.js' integrity='sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=' crossorigin='anonymous'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js' integrity='sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb' crossorigin='anonymous'></script>
     <script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js' integrity='sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn' crossorigin='anonymous'></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.2/socket.io.js" integrity="sha256-sdmLD9jD1PIzq3KOQPNSGZYxjv76rds79Mnyk5JNp1M=" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.1/socket.io.js" integrity="sha256-fiM0lX3OYzf0FfLBeLqFuCokh+rf1VhI/eanPbzldUM=" crossorigin="anonymous"></script>
     <script src='js/main.js'></script>
-  </body>
+    </body>
+
 </html>
